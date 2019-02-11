@@ -1,0 +1,54 @@
+<div class="container">
+
+<?php
+
+//Tässä valmiina setup shell.hamkkiin..
+//require_once 'mysliProps.php';
+
+
+//Tässä setup lokaaliin kikkailuun
+require_once 'testMysli.php';
+
+// Yhdistetään
+$conn = new mysqli($host, $username, $password, $dbname);
+// Checkataan menikö putkeen...
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+//Tässä sama query erinimisiin tauluihin.. jamke1 löytyy shell.hamkista
+
+//$sql = "SELECT kayttajatunnus, postinumero, kayttoikeustaso FROM jamke1";
+$sql = "SELECT kayttajatunnus, postinumero, kayttoikeustaso FROM kayttaja;";
+$result = $conn->query($sql);
+
+// Ajetaan tulokset taulukkooon...
+
+if ($result->num_rows > 0) {
+    echo "<div>
+            <table>
+	           <div>
+                    <tr>
+                        <th>KÃ¤yttÃ¤jtunnus</th>
+                        <th>postinumero</th>
+                        <th>KÃ¤yttöoikeustaso</th>
+                    </tr>
+                </div>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<div>
+                <tr>
+                    <td>" . $row["kayttajatunnus"] . "</td>
+                    <td>" . $row["postinumero"] . "</td>
+                    <td>" . $row["kayttoikeustaso"] ."</td>
+                </tr>
+             </div>";
+    }
+    echo "</table> </div>";
+} else {
+    echo "0 results";
+}
+
+// Suljetaan yhteys databaseen.. Tämä on tärkeää muistaa aina...
+
+$conn->close();
+?>
+</div>
