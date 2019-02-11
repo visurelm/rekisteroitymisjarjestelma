@@ -12,10 +12,10 @@ $res = mysqli_fetch_array($result);
 
 if ($result->num_rows > 0) {
 	if ($res['kayttoikeustaso']=='B1'){
-	header("Location: user.php");
+	header("Location: userView.php");
     exit;
 } 	else if ($res['kayttoikeustaso']=='A1'){
-	header("Location: admin.php");
+	header("Location: adminView.php");
     exit;
 } else {
 	$msg = "Käyttäjältä puuttuu käyttöoikeudet.";
