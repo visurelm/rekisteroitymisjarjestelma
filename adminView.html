@@ -2,21 +2,18 @@
 	<?php
 
 //Omat setupit shell.hamkkiin ja lokaaliin kikkailuun.. mysliProps == hamk.shell.....
-//require_once 'mysliProps.php';
+//require_once 'testMysli.php';
 
-require_once 'testMysli.php';
-
-//var sql-query='';
 
 // Yhdistetään databaseen
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli("127.0.0.1", "trtkm18b3", "trtkm18b3trtkm18b3", "trtkm18b3");
 // Checkattaan yhteys..
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 //Shell.hamkissa taulo jamke1-niminen..
-//$sql = "SELECT * FROM jamke1";
-$sql = "SELECT * FROM kayttaja";
+$sql = "SELECT * FROM jamke1";
+
 $result = $conn->query($sql);
 
 // luodaan taulu missä queryn tulokset esitellään ja sinne lisätään "muokkaa"button..
@@ -63,11 +60,12 @@ $conn->close();
 
 </div>
 
-<input type="text" id="test">
+<b><a href="etusivu.php">palaa etusivulle</a></b>
 
 <script>
-	var userId;
+	var nimi = "userID";
 	$(document).ready(
+
 			function() {
 				$("button").click(
 						function() {
@@ -79,9 +77,14 @@ $conn->close();
 							});
 							$userId = $tds.text();
 							console.log($userId);
-							$("#test").val($tds.text());
-							//TODO AJAX tähän...vielä...siirrä tuserID --> edit.html....
+							$("#testing").val($tds.text());
+							
+							console.log($userId);
+							document.cookie = nimi + "=" + $userId;
 
+							var url = "edit.php";
+							$(location).attr('href',url);
 						});
 			});
 </script>
+
