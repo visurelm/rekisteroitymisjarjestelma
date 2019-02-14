@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+ 
+<?php
+function asetaKeksit() {
+
+	$cookie_name = "userName";
+	$cookie_value = "MOI";
+	setcookie($cookie_name, $cookie_value, time() + (3600),"/"); 
+
+    echo "Cookie named '" . $_COOKIE[$cookie_name] . "' is not set!";
+} 
+?> 
+ 
 <html lang="en">
 <head>
   <title>Rekisteröitymisjärjestelmä</title>
@@ -13,6 +25,9 @@
   <div class="jumbotron">
     <h1>Rekisteröitymisjärjestelmä</h1> 
     <p></p> 
+	<?php 
+	echo $_cookie["userName"];
+	?>
   </div>
   <p></p> 
 </div>
